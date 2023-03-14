@@ -1,0 +1,7 @@
+.buttonz {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,49 @@
+.box-size-small {
+  font-size: 2rem;
+  color: #6495ED;
+  padding: 0.5rem;
+}
+
+.box-size-medium {
+  font-size: 3.5rem;
+  color: #6495ED;
+  padding: 0.5rem;
+}
+
+.box-size-large {
+  font-size: 5rem;
+  color: #6495ED;
+  padding: 0.5rem;
+}
+
+.price {
+  color: #118C4F;
+}
+
+.bi-chevron-right {
+  font-size: 4rem;
+  color: hsl(0, 0%, 64%);
+}
+
+.package-list-item:hover {
+  box-shadow: 0 0 11px #6495ED; 
+}
+
+.btn-primary {
+  background-color: #0065AB;
+}
+
+.pkgListItemButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-between;
+}
+
+.pkgPostbuttons {
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content:flex-end;
+  align-content: space-between;
+}

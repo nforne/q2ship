@@ -1,0 +1,60 @@
+
+.signinform {
+  display: flex;
+  flex-direction: column;
+  background-color: wheat;
+  align-self: center;
+  align-content: space-between;
+  border-radius: 10px;
+  box-shadow: 20px 20px 50px 15px gray;
+  padding: 5em;
+  margin: 0em 1em 1em 5em;
+  width: 90%;
+  position: relative;
+}
+
+.signin {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.back-button {
+  margin-bottom: 1.5rem;
+  align-self: center;
+}
+
+.signin-btns {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+
+.form {
+  box-shadow: 20px 20px 50px 15px gray;
+}
+
+.form input {
+  width: 80%;
+  border: 2px solid #DFF6FF;
+  border-radius: 4px;
+  
+}
+
+.form label {
+  display: block;
+  text-align: start;
+}
+
+.form input:hover {
+  border: 2px solid #07b2f6;
+}
+
+.form input[type=submit] {
+  border: 2px solid green !important;
+}
+
+.form input[type=submit]:hover {
+  border: 2px solid rgb(169, 253, 2) !important;
+}

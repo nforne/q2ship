@@ -1,0 +1,93 @@
+
+.homebtns {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-self: center;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: wheat;
+  border-radius: 20px;
+  box-shadow: 20px 20px 50px 15px gray;
+  padding: 5em;
+  margin: 0em 1em 1em 0.75em;
+  width: fit-content;
+  line-height: normal;
+  max-height: min-content;
+  z-index: 0;
+}
+
+.dt-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 150;
+}
+
+.hometx-span {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 12;
+  font-family: 'Times New Roman', Times, serif;
+  width: 90%;
+  align-self: center;
+  position: relative;
+  color:black;
+}
+
+#welcome-msg-box {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  position: relative;
+  z-index: 1000;
+  height: 15%;
+}
+
+#welcome-msg {
+  font-family: 'Sacramento', cursive;
+  font-size: 10em;
+  color: aqua;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.homelogoimg {
+  padding: 0.5em;
+  border:black;
+  box-shadow: 20px 20px 50px 15px gray;
+  position: relative;
+  align-self: flex-start;
+  z-index: 50;
+}
+
+#H-img {
+  position: absolute !important;
+}
+
+.pending {
+  width: 100%;
+  height: 100%;
+  position:relative;
+  font-family: 'Sacramento', cursive;
+  color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.homebtns button {
+  border: 2px solid aqua;
+}
+
+.homebtns button:hover {
+  border: 2px solid greenyellow;
+  box-shadow: 20px 20px 50px 15px aqua;
+}
+
+#default {
+  box-shadow: 20px 20px 50px 15px gray;
+  padding: 0.5em;
+  position: relative;
+  border-radius: 30px;
+  border:black;
+}

@@ -1,0 +1,173 @@
+----------------------------------------------------------
+sudo service postgresql start
+psql
+----------------------------------------------------------
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help with psql commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+----------------------------------------------------------
+
+
+\h
+----------------------------------------------------------
+Available help:
+  ABORT                            ALTER SERVER                     CREATE CAST                      CREATE TABLE                     DROP EXTENSION                   DROP TEXT SEARCH TEMPLATE        REVOKE
+  ALTER AGGREGATE                  ALTER STATISTICS                 CREATE COLLATION                 CREATE TABLE AS                  DROP FOREIGN DATA WRAPPER        DROP TRANSFORM                   ROLLBACK
+  ALTER COLLATION                  ALTER SUBSCRIPTION               CREATE CONVERSION                CREATE TABLESPACE                DROP FOREIGN TABLE               DROP TRIGGER                     ROLLBACK PREPARED
+  ALTER CONVERSION                 ALTER SYSTEM                     CREATE DATABASE                  CREATE TEXT SEARCH CONFIGURATION DROP FUNCTION                    DROP TYPE                        ROLLBACK TO SAVEPOINT
+  ALTER DATABASE                   ALTER TABLE                      CREATE DOMAIN                    CREATE TEXT SEARCH DICTIONARY    DROP GROUP                       DROP USER                        SAVEPOINT
+  ALTER DEFAULT PRIVILEGES         ALTER TABLESPACE                 CREATE EVENT TRIGGER             CREATE TEXT SEARCH PARSER        DROP INDEX                       DROP USER MAPPING                SECURITY LABEL
+  ALTER DOMAIN                     ALTER TEXT SEARCH CONFIGURATION  CREATE EXTENSION                 CREATE TEXT SEARCH TEMPLATE      DROP LANGUAGE                    DROP VIEW                        SELECT
+  ALTER EVENT TRIGGER              ALTER TEXT SEARCH DICTIONARY     CREATE FOREIGN DATA WRAPPER      CREATE TRANSFORM                 DROP MATERIALIZED VIEW           END                              SELECT INTO
+  ALTER EXTENSION                  ALTER TEXT SEARCH PARSER         CREATE FOREIGN TABLE             CREATE TRIGGER                   DROP OPERATOR                    EXECUTE                          SET
+  ALTER FOREIGN DATA WRAPPER       ALTER TEXT SEARCH TEMPLATE       CREATE FUNCTION                  CREATE TYPE                      DROP OPERATOR CLASS              EXPLAIN                          SET CONSTRAINTS
+  ALTER FOREIGN TABLE              ALTER TRIGGER                    CREATE GROUP                     CREATE USER                      DROP OPERATOR FAMILY             FETCH                            SET ROLE
+  ALTER FUNCTION                   ALTER TYPE                       CREATE INDEX                     CREATE USER MAPPING              DROP OWNED                       GRANT                            SET SESSION AUTHORIZATION
+  ALTER GROUP                      ALTER USER                       CREATE LANGUAGE                  CREATE VIEW                      DROP POLICY                      IMPORT FOREIGN SCHEMA            SET TRANSACTION
+  ALTER INDEX                      ALTER USER MAPPING               CREATE MATERIALIZED VIEW         DEALLOCATE                       DROP PUBLICATION                 INSERT                           SHOW
+  ALTER LANGUAGE                   ALTER VIEW                       CREATE OPERATOR                  DECLARE                          DROP ROLE                        LISTEN                           START TRANSACTION
+  ALTER LARGE OBJECT               ANALYZE                          CREATE OPERATOR CLASS            DELETE                           DROP RULE                        LOAD                             TABLE
+  ALTER MATERIALIZED VIEW          BEGIN                            CREATE OPERATOR FAMILY           DISCARD                          DROP SCHEMA                      LOCK                             TRUNCATE
+  ALTER OPERATOR                   CHECKPOINT                       CREATE POLICY                    DO                               DROP SEQUENCE                    MOVE                             UNLISTEN
+  ALTER OPERATOR CLASS             CLOSE                            CREATE PUBLICATION               DROP ACCESS METHOD               DROP SERVER                      NOTIFY                           UPDATE
+  ALTER OPERATOR FAMILY            CLUSTER                          CREATE ROLE                      DROP AGGREGATE                   DROP STATISTICS                  PREPARE                          VACUUM
+  ALTER POLICY                     COMMENT                          CREATE RULE                      DROP CAST                        DROP SUBSCRIPTION                PREPARE TRANSACTION              VALUES
+  ALTER PUBLICATION                COMMIT                           CREATE SCHEMA                    DROP COLLATION                   DROP TABLE                       REASSIGN OWNED                   WITH
+  ALTER ROLE                       COMMIT PREPARED                  CREATE SEQUENCE                  DROP CONVERSION                  DROP TABLESPACE                  REFRESH MATERIALIZED VIEW
+  ALTER RULE                       COPY                             CREATE SERVER                    DROP DATABASE                    DROP TEXT SEARCH CONFIGURATION   REINDEX
+  ALTER SCHEMA                     CREATE ACCESS METHOD             CREATE STATISTICS                DROP DOMAIN                      DROP TEXT SEARCH DICTIONARY      RELEASE SAVEPOINT
+  ALTER SEQUENCE                   CREATE AGGREGATE                 CREATE SUBSCRIPTION              DROP EVENT TRIGGER               DROP TEXT SEARCH PARSER          RESET
+
+----------------------------------------------------------
+
+
+\?
+----------------------------------------------------------
+General
+  \copyright             show PostgreSQL usage and distribution terms
+  \crosstabview [COLUMNS] execute query and display results in crosstab
+  \errverbose            show most recent error message at maximum verbosity
+  \g [FILE] or ;         execute query (and send results to file or |pipe)
+  \gexec                 execute query, then execute each value in its result
+  \gset [PREFIX]         execute query and store results in psql variables
+  \gx [FILE]             as \g, but forces expanded output mode
+  \q                     quit psql
+  \watch [SEC]           execute query every SEC seconds
+
+Help
+  \? [commands]          show help on backslash commands
+  \? options             show help on psql command-line options
+  \? variables           show help on special variables
+  \h [NAME]              help on syntax of SQL commands, * for all commands
+
+Query Buffer
+  \e [FILE] [LINE]       edit the query buffer (or file) with external editor
+  \ef [FUNCNAME [LINE]]  edit function definition with external editor
+  \ev [VIEWNAME [LINE]]  edit view definition with external editor
+  \p                     show the contents of the query buffer
+  \r                     reset (clear) the query buffer
+  \s [FILE]              display history or save it to file
+  \w FILE                write query buffer to file
+
+Input/Output
+  \copy ...              perform SQL COPY with data stream to the client host
+  \echo [STRING]         write string to standard output
+  \i FILE                execute commands from file
+  \ir FILE               as \i, but relative to location of current script
+  \o [FILE]              send all query results to file or |pipe
+  \qecho [STRING]        write string to query output stream (see \o)
+
+Conditional
+  \if EXPR               begin conditional block
+  \elif EXPR             alternative within current conditional block
+  \else                  final alternative within current conditional block
+  \endif                 end conditional block
+
+Informational
+  (options: S = show system objects, + = additional detail)
+  \d[S+]                 list tables, views, and sequences
+  \d[S+]  NAME           describe table, view, sequence, or index
+  \da[S]  [PATTERN]      list aggregates
+  \dA[+]  [PATTERN]      list access methods
+  \db[+]  [PATTERN]      list tablespaces
+  \dc[S+] [PATTERN]      list conversions
+  \dC[+]  [PATTERN]      list casts
+  \dd[S]  [PATTERN]      show object descriptions not displayed elsewhere
+  \dD[S+] [PATTERN]      list domains
+  \ddp    [PATTERN]      list default privileges
+  \dE[S+] [PATTERN]      list foreign tables
+  \det[+] [PATTERN]      list foreign tables
+  \des[+] [PATTERN]      list foreign servers
+  \deu[+] [PATTERN]      list user mappings
+  \dew[+] [PATTERN]      list foreign-data wrappers
+  \df[antw][S+] [PATRN]  list [only agg/normal/trigger/window] functions
+  \dF[+]  [PATTERN]      list text search configurations
+  \dFd[+] [PATTERN]      list text search dictionaries
+  \dFp[+] [PATTERN]      list text search parsers
+  \dFt[+] [PATTERN]      list text search templates
+  \dg[S+] [PATTERN]      list roles
+  \di[S+] [PATTERN]      list indexes
+  \dl                    list large objects, same as \lo_list
+  \dL[S+] [PATTERN]      list procedural languages
+  \dm[S+] [PATTERN]      list materialized views
+  \dn[S+] [PATTERN]      list schemas
+  \do[S+] [PATTERN]      list operators
+  \dO[S+] [PATTERN]      list collations
+  \dp     [PATTERN]      list table, view, and sequence access privileges
+  \drds [PATRN1 [PATRN2]] list per-database role settings
+  \dRp[+] [PATTERN]      list replication publications
+  \dRs[+] [PATTERN]      list replication subscriptions
+  \ds[S+] [PATTERN]      list sequences
+  \dt[S+] [PATTERN]      list tables
+  \dT[S+] [PATTERN]      list data types
+  \du[S+] [PATTERN]      list roles
+  \dv[S+] [PATTERN]      list views
+  \dx[+]  [PATTERN]      list extensions
+  \dy[+]  [PATTERN]      list event triggers
+  \l[+]   [PATTERN]      list databases
+  \sf[+]  FUNCNAME       show a function's definition
+  \sv[+]  VIEWNAME       show a view's definition
+  \z      [PATTERN]      same as \dp
+
+  Formatting
+  \a                     toggle between unaligned and aligned output mode
+  \C [STRING]            set table title, or unset if none
+  \f [STRING]            show or set field separator for unaligned query output
+  \H                     toggle HTML output mode (currently off)
+  \pset [NAME [VALUE]]   set table output option
+                         (NAME := {border|columns|expanded|fieldsep|fieldsep_zero|
+                         footer|format|linestyle|null|numericlocale|pager|
+                         pager_min_lines|recordsep|recordsep_zero|tableattr|title|
+                         tuples_only|unicode_border_linestyle|
+                         unicode_column_linestyle|unicode_header_linestyle})
+  \t [on|off]            show only rows (currently off)
+  \T [STRING]            set HTML <table> tag attributes, or unset if none
+  \x [on|off|auto]       toggle expanded output (currently off)
+
+Connection
+  \c[onnect] {[DBNAME|- USER|- HOST|- PORT|-] | conninfo}
+                         connect to new database (currently "labber")
+  \conninfo              display information about current connection
+  \encoding [ENCODING]   show or set client encoding
+  \password [USERNAME]   securely change the password for a user
+
+Operating System
+  \cd [DIR]              change the current working directory
+  \setenv NAME [VALUE]   set or unset environment variable
+  \timing [on|off]       toggle timing of commands (currently off)
+  \! [COMMAND]           execute command in shell or start interactive shell
+
+Variables
+  \prompt [TEXT] NAME    prompt user to set internal variable
+  \set [NAME [VALUE]]    set internal variable, or list all if no parameters
+  \unset NAME            unset (delete) internal variable
+
+Large Objects
+  \lo_export LOBOID FILE
+  \lo_import FILE [COMMENT]
+  \lo_list
+  \lo_unlink LOBOID      large object operations
+
+----------------------------------------------------------

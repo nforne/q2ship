@@ -1,0 +1,30 @@
+.scrollup {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content:space-around;
+  background-color: transparent;
+  height: 5em;
+  position: fixed; /* Set the navbar to fixed position */
+  width: 100%; /* Full width */
+  left: 0;
+  bottom: 15px;
+  margin-bottom: 15px;
+  z-index: 0;
+}
+
+
+#scrollup {
+  color: #47B5FF;
+  background-color: transparent;
+  margin-left: 85%;
+  box-shadow: 20px 20px 50px 15px grey;
+  border-radius: 20px;
+  color:transparent;
+  z-index: 100;
+}
+
+#scrollup:hover {
+  visibility: visible;
+  box-shadow: 20px 20px 50px 15px aqua;
+}

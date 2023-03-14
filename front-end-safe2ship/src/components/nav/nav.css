@@ -1,0 +1,127 @@
+#logo {
+  height: 25px;
+  position: relative;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.logotag {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* box-shadow: 20px 20px 50px 15px grey; */
+  align-items: center;
+  background-color: black;
+  border-color: aqua;
+  padding: 0.5em;
+  border-style:ridge;
+  height: inherit;
+  top: 0.5em;
+}
+
+.logotag:hover {
+  box-shadow: 20px 20px 50px 15px aqua;
+}
+
+.logo h1 {
+  color: whitesmoke;
+  font-style: italic;
+  /* font-family: 'Sacramento', cursive; */
+}
+
+.circle {
+  height: 5em;
+  width: 5em;
+  background-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+#logoimg {
+  height: inherit;
+  width: inherit;
+  background-color: silver;
+  padding: .05em;
+  border-style: none;
+  border-style: outset;
+}
+
+.App-logo {
+  height: inherit;
+  width: inherit;
+}
+
+#logobtn {
+  height: inherit;
+  background-color: #5a5c5f ;
+}
+
+#logobtn h1 {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-content: space-between;
+  align-items: baseline;
+}
+
+#diffsquare {
+  color: transparent;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+  height: 80px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgb(98, 93, 93);
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  padding-bottom: 0.5em;
+  z-index: 5000;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  border-bottom: 0.25em solid black;
+  
+}
+
+.nav:hover {
+  box-shadow: 20px 20px 50px 15px aqua;
+}
+
+.btn-primary {
+  background-color: silver;
+  border: black;
+}
+
+#dropdownMenu2 {
+  border-color: aqua;
+}
+
+#dropdownMenu2:hover {
+  box-shadow: 20px 20px 50px 15px aqua;
+}
+
+.dropdown-item:hover {
+  box-shadow: 20px 20px 50px 15px aqua;
+}
+
+.dropdown-menu li {
+  width: 10.9em;
+}
+
+.menu #id {
+  background-color: transparent;
+  border-color: aqua;
+  color: white;
+}
