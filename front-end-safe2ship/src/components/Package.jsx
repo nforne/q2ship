@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Profile from "./Profile";
 import axios from "axios";
 import "./package.css";
@@ -22,51 +22,27 @@ export default function Package(props) {
     setView(prev => ({...prev, v: view }))
   }
 
-  const profileviewHandler = (input) => {
+  const profileviewHandler = (input, vChange=true) => {
     axios.post('/api/users/other', {id: input})
           .then((userInfo) => { 
-            console.log(userInfo.data) //--------------------------------------
             setView(prev => ({...prev, profile: userInfo.data}))
-            vSwitch('profile')
+            if (vChange) vSwitch('profile');
           })
-          .catch(err => console.log(err)) //-------------------------------
+          .catch(err => console.log(err));
   } 
 
-  const packagesInOrdreCart = [];
-  const replyCheck = {}; // for use to check for updates in the replies
-
-  const pollQueue = (list, polltimer = polltimer) => {
-    axios.post('/api/pkgs/poll', {list: packagesInOrdreCart })
-         .the(res => {   // res.data === {id:** , messages:[{}]}
-     
-            if (props.listpkg.messages.length < res.data.messages.length) {
-              let targetPkg = {...props.listpkg};
-              targetPkg['messages'] = res.data.messages;
-              props.updatePkgAndOders(props.setOrdercart, targetPkg, 'active');  // update array actually
-              props.updatePkgAndOders(props.setPkgs, targetPkg, 'active');
-              clearInterval(polltimer);  
-            }
-
-         })
-  }
-
+  const packagesInOrdreCart = []; // ----------------------------------
   
   const addToOrderCartHandler = (props) => {  // send msg to pkg owner
-    // console.log(props.ordercart.active) //------------------------------------------
-
     axios.post('/api/pkgs/message', {
       pkgId:props.listpkg.id, 
       customer_id: props.listpkg.customer_id, 
       shipper_id:props.user[0].id, 
       message: `Hello!, Please, I would like to move your package... #${props.listpkg.id}`})
           .then(message => {
-            console.log(message.data) // ------------------------
             packagesInOrdreCart.push(props.listpkg.id);
             if (packagesInOrdreCart.length !== 0) {
-
-              const polltimer  = setInterval(() => {
-                pollQueue(packagesInOrdreCart);
-              } ,2000);
+              // websocket
 
             } 
           })
@@ -74,13 +50,7 @@ export default function Package(props) {
       if (pkg.id === props.listpkg.id) return;
     }
     props.updatePkgAndOders(props.setOrdercart, props.listpkg, 'active')
-    
-    console.log('this pkg ===>', props.listpkg) //------------------------------------------
-    // console.log(props.ordercart.active.length) //------------------------------------------
-    // console.log(props.ordercart.active) //------------------------------------------
   }
-  
-  console.log('these pops ===>', JSON.stringify(props)) //------------------------------------------
   
   const inOrdercartCheck = () => {
     for (let pkg of props.ordercart.active) {
@@ -91,25 +61,18 @@ export default function Package(props) {
       };
     }
   }
-//-----------------pkg msgs------------------------------------------------
-console.log("these listpkg ===>", props.messages) //----------------------------------------------------------
-const messages = []
-// const msgsInput = props.listpkg.messages ? [...props.listpkg.messages] : [];
-let key = props.id
-if (Array.isArray(props.messages)) {
-  props.messages.forEach(msg => {
-      key += 1;
-      console.log('this json message ===> ', msg) // -------------------------------------------------
-      const djsMsg = JSON.parse(msg);
-      if (djsMsg.shipper_id === props.user[0].id) messages.push( <Pkgmessage key={key} message={msg}/>);
-  })
 
-}
+//-----------------pkg msgs------------------------------------------------
+
+const messages = []
+
 
   return (
     <div className="card">
-    {view.v === "profile" &&<Profile  {...view.profile} vSwitch={vSwitch} />}
-      {view.v === "pkg" && 
+    
+    {view.v === "profile" && <Profile  {...view.profile} vSwitch={vSwitch} />}
+    
+    {view.v === "pkg" && 
       <div>
       <div className="card-header d-flex justify-content-between">
         <div>Package #: {props.id}</div>

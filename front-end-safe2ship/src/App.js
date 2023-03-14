@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { ScrollTo } from "react-scroll-to";
 
 import Nav from "./components/nav";
@@ -22,7 +23,7 @@ import  io  from "socket.io-client";
 
 const URL = "http://localhost:3001";
 
-
+export const AppContext = createContext();
 
 const App = () => {
 
@@ -141,72 +142,50 @@ const App = () => {
 
   return (
     <div className="App">
-      
-      <Nav {...props}/>
-      
-      <hr className='H-line'/>
-      
+      <AppContext.Provider value={props}>
+        <Router>
+          <Nav {...props}/>
 
-      {error.length > 0 &&  <div className='errmsgs'>{error}</div>}
-      
-      <ScrollTo>
-        {({ scroll }) => error.length > 0 || hview.v === "home" ? scroll({ x: 1, y:1, smooth: true }): '' }
-      </ScrollTo>
-    
-      <hr/>
-      <section className='main'>
-        {hview.v === 'pending' &&  <Pending/>}
-        {hview.v === "home" && <Home  {...props} />}
-        {hview.v === "profile" &&<Profile  {...user.user[0]} {...props} />}
+          <hr className='H-line'/>
+          
+          {error.length > 0 &&  <div className='errmsgs'>{error}</div>}
+          
+          <ScrollTo>
+            {({ scroll }) => error.length > 0 || hview.v === "home" ? scroll({ x: 1, y:1, smooth: true }): '' }
+          </ScrollTo>
+        
+          <hr/>
+          <section className='main'>
+            {hview.v === 'pending' &&  <Pending/>}
+            {hview.v === "home" && <Home  {...props} />}
+            {hview.v === "profile" && <Profile  {...user.user[0]} {...props} />}
+            {hview.v === "signIn" && <SignIn {...props}/>}
+            {hview.v === "signUp" && <SignUp {...props}/>}
+            {hview.v === "customerHome" && <CustomerHome  {...props}/>}
+            {hview.v === "shipperHome" && <ShipperHome  {...props}/>}
+            {hview.v === "packagePage" && <Package {...props}/> /* when a new package is created, return to view it on the home */} 
+            {hview.v === "postPackage" && <PostPackage {...props}/>}
 
-        {hview.v === "signIn" && <SignIn {...props}/>}
-        {hview.v === "signUp" && <SignUp {...props}/>}
-        {hview.v === "customerHome" && <CustomerHome  {...props}/>}
-        {hview.v === "shipperHome" && <ShipperHome  {...props}/>}
-        {hview.v === "packagePage" && <Package {...props}/> /* // when a new package is created, return to view it on the home */} 
-        {hview.v === "postPackage" && <PostPackage {...props}/>}
 
-        {/* ## --Working Notes-- ##
-            -Each package carries a messaging platform client like Whatsapp
-            -Profile on the main view(here home) and on the package view
-            -Perhaps no package on the main view
-            ---------------------------------------------------------------------------------------
-            -CRUD operations functionality for users(shipper, customer, admin) and packages
-            -add the admin, messages, help, and documentation views. the messeges view to view inbox or mail
-            -user profile update or upgrade
-            -package edit - available only when package is not yet shipped.
-            -uploads, subforms, pkg messaging platform service, backend and data storage, websocket
-            -security, ssl, cleenup props and refactor
-            -Every created package carries a group chat room with stati available, dilivered, shipped, canceled, declined - in which case it comes back to availabe or canceled depending on owners choice
-            -each request to ship subsribes to the group chatroom and carries a button to Accept? and button to the shipper's(requester's) profile
-            -once a shipping request is accepted the group chat room is temporally frozen and all other participants notified by and package status change to shipped.
-            -the accpepted request now oppens into a private chatroom with the chipper. A status appears on it as shipped and changes to delivered when it is done. 
-            -delivery time is tracked and indicated with green for before or in time or red for late.
-            -The private chatroom opens by the apperance of a message button on the request message and the disapperance or freeze of the accept buttton.
-            -if the shipper declines the package, buttons appear to cancel it or repost it - in which case a new group chatroom is opened. within 24hours after which its automatically canceled and automated messages sent to both parties on whats next., 
-            -there will also be a status to show if a user is online or not.
-            -on the shipper side, once in charge of a package, button appears to indicate diliverd. on press, status light becomes orange from green pending owner confirmation.
-            -on owner side once delivered, a button appears to confirm delivery in which case the light changes blue for delivered.
-            -there should be a view to lodge a complain or querry and messenging to indicate regularised.
-            -add mapping service on the packages
-            -add search service for shipper depending on location/area
-            -add monetizing scheme service
-            -add public authority and security service connection in admin view
-            -add subscription brackground verification service
-            -account creation pending background verification service results and notification - creation declined or accepted and messaging
-            -Upgrade style, APIs, ux
-            -add 'a set path for the day' map feature for the shipper, to be used to sort available packages around and along that path and show them as available, if not, sort available with last map.
-            -write unit, integration and E2E tests for code coverage - TDD was strongly prescribed
-            -make site responsive and build mobile version
-            -design deployment plan/architecture pub/sub, containers, ...etc
-            -add a pkg tracking view
-            -a package 'really becomes' an order only when a shipping confirmation has been established at which point it is saved to the db and all parties duely notified.
-            -a newly created package sits in the packages view. Delivered and declined go package history
-            -a newly requested order sits in the order cart. delivered and declined go to order history
-        */}
+            {/* <Routes>
+              <Route path="/" element={<Home  {...props} />}/>
+              <Route path="/pending" element={<Pending/>}/>
+              <Route path="/profile" element={<Profile  {...user.user[0]} {...props} />}/>             
+              <Route path="/signIn" element={<SignIn {...props}/>}/>              
+              <Route path="/signUp" element={<SignUp {...props}/>}/>              
+              <Route path="/customerHome" element={<CustomerHome  {...props}/>}/>              
+              <Route path="/shipperHome" element={<ShipperHome  {...props}/>}/>              
+              <Route path="/packagePage" element={<Package {...props}/>}/>              
+              <Route path="/postPackage" element={<PostPackage {...props}/>}/>              
+              <Route path="*" element={<h1> ERROR! PAGE NOT FOUND </h1>}/>
+            </Routes> */}
+            
+          </section>
 
-      </section>
-      <Scrollup/> 
+          <Scrollup/>
+
+        </Router>
+      </AppContext.Provider>
     </div>
   );
 }

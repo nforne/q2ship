@@ -1,17 +1,17 @@
-import React from "react";
+import {React, useContext } from "react";
 import logo1 from "./logo.svg";
-// import logo1 from "./logo_2.svg";
 
+import { AppContext } from "../../App";
 
 export default function Logo(props) {
+  const { hv_handler } = useContext(AppContext);
    return (
-    <div className="logotag rounded-pill">
-      <div className="logo">
-          <button type="button" id="logobtn" onClick={(e) => props.hv_handler('home')} className="btn btn-secondary rounded-pill"><h1>safe2ship</h1></button>
-      </div>
-      <i id='diffsquare' className="bi bi-square"></i> 
+    <div className="logotag ">
+      
+      <h1 id="logobtn" onClick={(e) => hv_handler('home')}>safe2ship</h1>
+      
       <div className="circle">
-          <img src={logo1} id="logoimg" onClick={(e) => props.logoutHandler(props)} className="rounded rounded-pill" alt={"logo"}/>
+          <img src={logo1} id="logoimg" onClick={(e) => {hv_handler('home'); props.logoutHandler(props);}} className="rounded rounded-pill" alt={"logo"}/>
       </div>
     </div>
    );

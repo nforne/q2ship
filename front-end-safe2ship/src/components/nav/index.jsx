@@ -1,10 +1,14 @@
-import React, {useEffect} from "react";
+import {React, useEffect, useContext, createContext} from "react";
 import axios from "axios";
 
 import Logo from "./logo";
 import Menu from "./menu";
 
 import './nav.css';
+
+import { AppContext } from "../../App";
+
+export const MenuContext = createContext();
 
 export default function Nav(props) {
 
@@ -17,29 +21,34 @@ export default function Nav(props) {
         console.log(e.data); //----------------------------------
     });
   }
+
+  const navProps = useContext(AppContext);
+  navProps['logoutHandler'] = logoutHandler;
     
    return (
     <div >
-     <nav className="nav">
-      <Logo hv_handler={props.hv_handler} logoutHandler={logoutHandler} {...props}/>
-      <div className="menu">
-        <div>
+      <MenuContext.Provider value={navProps}>
+        <nav className="nav">
+          <Logo logoutHandler={logoutHandler} />
+          <div className="menu">
+            <div>
 
-          {props.user[0].email && 
-          <button id='id' type="button" className="btn btn-outline-success btn-lg"><i className="bi bi-unlock-fill"></i>: {props.user[0].name}</button>
-          }
+              {navProps.user[0].email && 
+              <button id='id' type="button" className="btn btn-outline-success btn-lg"><i className="bi bi-unlock-fill"></i>: {navProps.user[0].name}</button>
+              }
 
+            </div>
+            <i id='diffsquare' className="bi bi-square"></i>
+            <div>
+              <Menu logoutHandler={logoutHandler} {...navProps}/>
+            </div>
         </div>
-        <i id='diffsquare' className="bi bi-square"></i>
+        
+        </nav>
         <div>
-          <Menu {...props} logoutHandler={logoutHandler}/>
+          <br className='H-line'/>
         </div>
-     </div>
-     
-     </nav>
-     <div>
-      <br className='H-line'/>
-     </div>
+     </MenuContext.Provider>
     </div>
      
    );

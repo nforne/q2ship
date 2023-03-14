@@ -53,7 +53,7 @@ module.exports = (db) => {
 
         const qVars = (table) => {
             return   {
-                   text: `SELECT * FROM ${table} WHERE id = $1;` ,
+                   text: `SELECT * FROM ${table} WHERE unique_id = $1;` ,
                    values: [id]
                }
            }

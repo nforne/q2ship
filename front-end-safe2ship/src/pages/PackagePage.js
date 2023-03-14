@@ -25,15 +25,15 @@ export default function PackagePage(props) {
           .then((userInfo) => { 
             setView(prev => ({...prev, profile: userInfo.data}))
           })
-          .catch(err => console.log(err)) //-------------------------------
+          .catch(err => console.log(err));
   } 
 
-  useEffect(() => {
+ useEffect(() => {
 
-    props.v === 'zoomin' ? profileviewHandler(props.customer_id) : console.log('zoomout');
-    console.log('this profile ===>', view.profile) //--------------------------------------
-
-  }, [])
+   if (props.v === 'zoomin' || props.hview.v === 'packagePage') profileviewHandler(props.owner_id);
+  
+ }, [])
+  
   
   return (
     <div className="container my-5 py-4">
